@@ -10,7 +10,7 @@ export function StatEditPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { stat: originalStat, idx, statAmount } = location.state as { stat: Statistic; idx: number; statAmount: number };
+  const { stat: originalStat, idx, statAmount, adding = false } = location.state as { stat: Statistic; idx: number; statAmount: number; adding?: boolean };
 
   const [stat, updateStat] = useState(originalStat);
 
@@ -141,10 +141,14 @@ export function StatEditPage() {
                 if (_.some(prunedStat.filters, _filter => _filter.valueOptions.length === 0)) {
                   const errorModal = Modal.getOrCreateInstance(document.getElementById('errorModal') as Element);
                   errorModal.toggle();
-                } else navigate('/', { state: { modifiedStat: { stat: prunedStat, idx: idx } } }); /* modifiedStats: {stat: Statistic; idx: number} */
+                } else {
+                  console.log(statAmount);
+                  if (adding) navigate('/', { state: { statToAdd: prunedStat, statAmount: statAmount } });
+                  else navigate('/', { state: { modifiedStat: { stat: prunedStat, idx: idx } } });
+                } /* modifiedStats: {stat: Statistic; idx: number} */
               }}
             >
-              Save Changes
+              {adding ? 'Add Stat' : 'Save Changes'}
             </button>
           </>
         )}

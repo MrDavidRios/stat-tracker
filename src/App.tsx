@@ -29,7 +29,14 @@ export function App(this: any) {
     const { statToDeleteIdx: idxToDelete, statAmount } = location.state as { statToDeleteIdx: number; statAmount: number };
     const newArr = [...statistics].filter((_statistic, idx) => idx !== idxToDelete);
 
-    console.log(statistics.length, statAmount);
+    if (statistics.length === statAmount) setStatistics(newArr);
+  }
+
+  if ((location as any).state?.statToAdd !== undefined) {
+    console.log(location.state);
+    const { statToAdd, statAmount } = location.state as { statToAdd: Statistic; statAmount: number };
+    const newArr = [...statistics];
+    newArr.push(statToAdd);
 
     if (statistics.length === statAmount) setStatistics(newArr);
   }
@@ -51,7 +58,7 @@ export function App(this: any) {
         <StartupToggle enabled={autoStartup} callback={setAutoStartup} />
       </header>
       <StatsList statistics={statistics} />
-      <AddStatButton />
+      <AddStatButton statistics={statistics} />
     </div>
   );
 }

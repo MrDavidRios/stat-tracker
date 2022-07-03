@@ -7,6 +7,8 @@ export const StatCard = ({ stat, idx, statAmount }: { stat: Statistic; idx: numb
   // - Number of entries
   // - Filters & different options (2 different options minimum)
 
+  console.log(stat, stat.statName);
+
   const multipleEntries = !!(stat.entries.length > 1 || stat.entries.length === 0);
 
   const navigate = useNavigate();
