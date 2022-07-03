@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Inter:wght@100;200;300;400&family=Lato&family=Roboto:wght@300;400&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '../../../node_modules/bootstrap/scss/functions';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// Modified Bootstrap Variables
+$primary: $accent-color-purple;
+
+// Bootstrap Requirements
+@import '../../../node_modules/bootstrap/scss/functions';
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/maps';
+@import '../../../node_modules/bootstrap/scss/mixins';
+@import '../../../node_modules/bootstrap/scss/root';
+
+// Bootstrap Options
+@import '../../../node_modules/bootstrap/scss/buttons';
+@import '../../../node_modules/bootstrap/scss/dropdown';
+@import '../../../node_modules/bootstrap/scss/close';
+@import '../../../node_modules/bootstrap/scss/modal';
+@import '../../../node_modules/bootstrap/scss/helpers';
+@import '../../../node_modules/bootstrap/scss/forms';
+
+// Pages
+@import 'pages/mainPage.scss';
+@import 'pages/statEditPage.scss';
+
+// Components
+@import 'components/actionComponent';
+@import 'components/statCard';
+@import 'components/dropdown';
+@import 'components/filterOptionsModal';
+
+* {
+  font-family: 'Heebo', sans-serif;
+
+  user-select: none;
+}
+
+p,
+body {
+  margin: 0 !important;
+}
+
+// Not really sure why this should be necessary...
+head {
+  display: none;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+h1,
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+#mainWrapper header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px 0 30px;
+
+  div {
+    margin-top: 10px;
+  }
+}
+
+input[type='file'] {
+  color: transparent;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #afafaf;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(196, 196, 196);
+}
+
+.horizontally-centered-absolute {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.back-arrow-btn {
+  background: none;
+  border: none;
+}
+
+.big-btn {
+  background-color: $accent-color-purple;
+  color: white;
+
+  height: 40px;
+
+  border: none;
+  border-radius: 20px;
+
+  font-size: 20px;
+
+  font-family: 'Roboto', sans-serif;
+
+  cursor: pointer;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+}

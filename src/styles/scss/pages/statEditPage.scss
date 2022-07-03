@@ -1,0 +1,196 @@
+@import '../variables';
+
+#statEditPageWrapper {
+  header {
+    display: grid;
+
+    height: 94px;
+
+    grid-template-columns: 96px calc(100% - (96px * 2));
+
+    align-items: center;
+    text-align: center;
+
+    padding: 10px;
+
+    button {
+      cursor: pointer;
+      border-radius: 10px;
+
+      i {
+        filter: $light-grey-filter;
+        font-size: 32px;
+      }
+
+      &:hover {
+        background-color: rgb(228, 228, 228);
+      }
+
+      &:active {
+        background-color: rgb(202, 202, 202);
+        margin-top: 2px;
+      }
+    }
+
+    > div {
+      width: 100%;
+
+      .input-with-label-outside {
+        width: min-content;
+        margin: auto;
+
+        position: relative;
+
+        input {
+          height: 40px;
+          width: min-content !important;
+          text-align: center;
+
+          font-size: 24px;
+
+          border-radius: 10px;
+
+          &:focus {
+            + p {
+              top: -26px;
+            }
+          }
+        }
+
+        p {
+          position: absolute;
+          left: 0;
+          top: -22px;
+
+          color: rgb(119, 119, 119);
+
+          transition: 0.15s ease;
+        }
+      }
+    }
+  }
+
+  main {
+    text-align: center;
+
+    padding: 0 40px 0 40px;
+
+    hr {
+      display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 1em 0;
+      padding: 0;
+    }
+  }
+}
+
+#statNameInput {
+  background-color: $foreground-color;
+  border: none;
+}
+
+#addFilterButton {
+  width: 175px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  margin: auto;
+  margin-top: 20px;
+}
+
+#saveEditsButton {
+  width: 200px;
+}
+
+.input-with-label-below {
+  position: relative;
+
+  input:focus + p {
+    top: 40px;
+  }
+
+  p {
+    position: absolute;
+    left: 0px;
+    top: 36px;
+
+    color: rgb(119, 119, 119);
+
+    transition: 0.15s ease;
+  }
+}
+
+#statFilterForm {
+  max-height: calc(100vh - 374px);
+  overflow-y: auto;
+
+  > div:last-of-type hr {
+    border-top: 1px solid #fff;
+  }
+}
+
+.filter-template-edit {
+  min-height: 80px;
+
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto 2px;
+  align-items: center;
+  justify-content: center;
+
+  column-gap: 20px;
+
+  .input-with-label-below {
+    margin-bottom: 20px;
+  }
+
+  button:first-of-type {
+    height: 40px;
+
+    color: white !important;
+  }
+
+  .remove-filter-proto-btn,
+  #optionCard button,
+  #filterOptionsModal #closeButton {
+    background: none;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 6px;
+
+    > div {
+      padding-top: 2px;
+    }
+
+    i {
+      filter: $red-filter;
+      font-size: 24px;
+
+      padding-top: 2px;
+    }
+
+    &:hover {
+      background-color: rgb(228, 228, 228);
+    }
+
+    &:active {
+      background-color: rgb(202, 202, 202);
+      margin-top: 2px;
+    }
+  }
+
+  hr {
+    grid-column: 1 / column2-end;
+  }
+}

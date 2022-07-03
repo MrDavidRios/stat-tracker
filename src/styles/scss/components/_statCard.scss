@@ -1,0 +1,83 @@
+@import '../variables';
+
+.stat-card {
+  background-color: #fff;
+
+  height: 60px;
+  min-height: 60px;
+
+  display: grid;
+  align-items: center;
+
+  text-align: left;
+  column-gap: 10px;
+
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: 50% 50%;
+
+  padding: 0 5px 0 5px;
+
+  border-radius: 10px;
+
+  .stat-highlights {
+    color: #999999;
+
+    grid-row: 2;
+  }
+
+  button {
+    grid-row: 1 / row2-end;
+
+    border: none;
+
+    border-radius: 10px;
+
+    width: 50px;
+    height: 50px;
+  }
+
+  .add-button {
+    background-color: $accent-color-purple;
+    padding-top: 3px;
+
+    cursor: pointer;
+
+    i {
+      filter: $white-filter;
+
+      font-size: 32px;
+      height: 200px;
+    }
+
+    &:hover {
+      background-color: #998bc4;
+    }
+
+    &:active {
+      margin-top: 2px;
+    }
+  }
+
+  .edit-button {
+    background: none;
+
+    grid-column: 3;
+
+    cursor: pointer;
+
+    i {
+      font-size: 20px;
+
+      filter: invert(67%) sepia(13%) saturate(12%) hue-rotate(316deg) brightness(87%) contrast(85%);
+    }
+
+    &:hover {
+      background-color: rgb(228, 228, 228);
+    }
+
+    &:active {
+      background-color: rgb(202, 202, 202);
+      margin-top: 2px;
+    }
+  }
+}

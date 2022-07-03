@@ -1,0 +1,40 @@
+#mainWrapper {
+  background-color: #e6e6e6;
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 100%;
+  text-align: center; }
+
+.form-control {
+  width: auto; }
+
+.form-switch {
+  padding-left: 0px; }
+  .form-switch .form-check-input {
+    margin: 0; }
+
+#autoStartupCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; }
+
+#statsList {
+  background-color: #e6e6e6;
+  padding: 0 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto; }
+
+#addStatButton {
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 300px;
+  filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.25)); }
+  #addStatButton div {
+    margin-top: 3px; }
+    #addStatButton div i {
+      font-size: 24px; }
