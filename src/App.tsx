@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Statistic } from './components/Statistic';
+import { Entry, Statistic } from './components/Statistic';
 import { StartupToggle } from './components/StartupToggle';
 import { loadStats, saveStats } from './components/saveData';
 import { StatsList } from './StatsList';
@@ -41,9 +41,13 @@ export function App(this: any) {
     if (statistics.length === statAmount) setStatistics(newArr);
   }
 
-  function addEntry(statistic: Statistic, idx: number) {
+  function addEntry(idx: number, entry: Entry) {
     const newArr = [...statistics];
-    newArr[idx] = statistic;
+    const newStat = structuredClone(newArr[idx]) as Statistic;
+
+    newStat.entries.push(entry);
+    newArr[idx] = newStat;
+
     setStatistics(newArr);
   }
 
@@ -57,7 +61,7 @@ export function App(this: any) {
         <h1>Your Stats</h1>
         <StartupToggle enabled={autoStartup} callback={setAutoStartup} />
       </header>
-      <StatsList statistics={statistics} />
+      <StatsList statistics={statistics} addEntryCallback={addEntry} />
       <AddStatButton statistics={statistics} />
     </div>
   );

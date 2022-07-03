@@ -45,17 +45,21 @@ export function StatEditPage() {
             <p>Stat Name</p>
           </div>
         </div>
-        <button
-          id="deleteStatButton"
-          title="Delete Stat"
-          onClick={() => {
-            navigate('/', { state: { statToDeleteIdx: idx, statAmount: statAmount } });
-          }}
-        >
-          <div>
-            <i className="bi bi-trash"></i>
-          </div>
-        </button>
+        {adding ? (
+          ''
+        ) : (
+          <button
+            id="deleteStatButton"
+            title="Delete Stat"
+            onClick={() => {
+              navigate('/', { state: { statToDeleteIdx: idx, statAmount: statAmount } });
+            }}
+          >
+            <div>
+              <i className="bi bi-trash"></i>
+            </div>
+          </button>
+        )}
       </header>
       <main>
         <hr />

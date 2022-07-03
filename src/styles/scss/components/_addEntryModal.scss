@@ -1,0 +1,63 @@
+#addEntryModal {
+  position: absolute;
+
+  text-align: center;
+
+  background: white;
+
+  width: 400px;
+
+  border-radius: 10px;
+
+  display: grid;
+  grid-template-rows: 85px auto auto 80px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  > div:first-of-type {
+    button {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+    }
+  }
+
+  .input-with-label-below {
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .add-entry-filter-form {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    .dropdown {
+      position: initial;
+    }
+  }
+
+  #valueOptionsWrapper {
+    max-height: calc(90vh - 165px);
+    overflow-y: auto;
+
+    padding: 10px 0px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  > div:last-of-type {
+    display: flex;
+    align-items: center;
+  }
+
+  #addEntryButton {
+    margin: auto;
+    color: white;
+  }
+}

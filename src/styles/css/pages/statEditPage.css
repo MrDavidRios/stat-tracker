@@ -104,34 +104,35 @@
     color: white !important; }
   .filter-template-edit > div p {
     margin-top: 5px !important; }
-  .filter-template-edit .remove-filter-proto-btn,
-  .filter-template-edit #optionCard button,
-  .filter-template-edit #filterOptionsModal #closeButton {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    width: 38px;
-    height: 38px;
-    border-radius: 6px; }
-    .filter-template-edit .remove-filter-proto-btn > div,
-    .filter-template-edit #optionCard button > div,
-    .filter-template-edit #filterOptionsModal #closeButton > div {
-      padding-top: 2px; }
-    .filter-template-edit .remove-filter-proto-btn i,
-    .filter-template-edit #optionCard button i,
-    .filter-template-edit #filterOptionsModal #closeButton i {
-      filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%);
-      font-size: 24px;
-      padding-top: 2px; }
-    .filter-template-edit .remove-filter-proto-btn:hover,
-    .filter-template-edit #optionCard button:hover,
-    .filter-template-edit #filterOptionsModal #closeButton:hover {
-      background-color: #e4e4e4; }
-    .filter-template-edit .remove-filter-proto-btn:active,
-    .filter-template-edit #optionCard button:active,
-    .filter-template-edit #filterOptionsModal #closeButton:active {
-      background-color: #cacaca;
-      margin-top: 2px; }
   .filter-template-edit hr {
     grid-column: 1 / column2-end; }
+
+.remove-filter-proto-btn,
+#optionCard button,
+#closeButton {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px; }
+  .remove-filter-proto-btn > div,
+  #optionCard button > div,
+  #closeButton > div {
+    padding-top: 2px; }
+  .remove-filter-proto-btn i,
+  #optionCard button i,
+  #closeButton i {
+    filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%);
+    font-size: 24px;
+    padding-top: 2px; }
+  .remove-filter-proto-btn:hover,
+  #optionCard button:hover,
+  #closeButton:hover {
+    background-color: #e4e4e4; }
+  .remove-filter-proto-btn:active,
+  #optionCard button:active,
+  #closeButton:active {
+    background-color: #cacaca;
+    margin-top: 2px; }
