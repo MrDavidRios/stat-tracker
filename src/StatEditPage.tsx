@@ -15,9 +15,8 @@ export function StatEditPage() {
   const [filterModalOpenIdx, setFilterModalStatus] = useState(-1);
 
   function updateFilter(filter: FilterPrototype, idx: number) {
-    const newStat = { ...stat };
+    const newStat = structuredClone(stat);
     newStat.filters[idx] = filter;
-
     updateStat(newStat);
   }
 
