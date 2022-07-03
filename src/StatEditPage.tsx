@@ -1,6 +1,8 @@
+import { Modal } from 'bootstrap';
 import _ from 'lodash';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ErrorModal } from './components/ErrorModal';
 import { FilterOptionsModal } from './components/FilterOptionsModal';
 import { FilterPrototype, Statistic } from './components/Statistic';
 
@@ -8,7 +10,7 @@ export function StatEditPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { stat: originalStat, idx } = location.state as { stat: Statistic; saveCallback: Function; idx: number };
+  const { stat: originalStat, idx, statAmount } = location.state as { stat: Statistic; idx: number; statAmount: number };
 
   const [stat, updateStat] = useState(originalStat);
 
@@ -22,9 +24,6 @@ export function StatEditPage() {
 
   // On change, use original callback
   // Having replace = true makes it so that state doesn't carry to main page.
-
-  console.log(stat, originalStat, (location.state as any).stat);
-
   return (
     <div id="statEditPageWrapper">
       <header>
@@ -46,7 +45,17 @@ export function StatEditPage() {
             <p>Stat Name</p>
           </div>
         </div>
-        <p></p>
+        <button
+          id="deleteStatButton"
+          title="Delete Stat"
+          onClick={() => {
+            navigate('/', { state: { statToDeleteIdx: idx, statAmount: statAmount } });
+          }}
+        >
+          <div>
+            <i className="bi bi-trash"></i>
+          </div>
+        </button>
       </header>
       <main>
         <hr />
@@ -69,15 +78,20 @@ export function StatEditPage() {
                 ></input>
                 <p>Filter Name</p>
               </div>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => {
-                  setFilterModalStatus(idx);
-                }}
-              >
-                Edit Filter Options
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setFilterModalStatus(idx);
+                  }}
+                >
+                  Edit Filter Options
+                </button>
+                <p style={{ color: filter.valueOptions.length === 0 ? 'red' : '' }}>
+                  {filter.valueOptions.length === 0 ? 'No options' : filter.valueOptions.length > 1 ? filter.valueOptions.length + ' options' : '1 option'}
+                </p>
+              </div>
               {filterModalOpenIdx === idx ? <FilterOptionsModal filter={filter} idx={idx} updateFilterCallback={updateFilter} closeModalCallback={() => setFilterModalStatus(-1)} /> : ''}
               <button
                 className="remove-filter-proto-btn"
@@ -123,7 +137,11 @@ export function StatEditPage() {
               onClick={() => {
                 const prunedStat = { ...stat, filters: stat.filters.filter(_filter => _filter.name.trim() !== '') };
 
-                navigate('/', { state: { modifiedStat: { stat: prunedStat, idx: idx } } }); /* modifiedStats: {stat: Statistic; idx: number} */
+                // Check if there are any errors with input. If so, bring up modal window
+                if (_.some(prunedStat.filters, _filter => _filter.valueOptions.length === 0)) {
+                  const errorModal = Modal.getOrCreateInstance(document.getElementById('errorModal') as Element);
+                  errorModal.toggle();
+                } else navigate('/', { state: { modifiedStat: { stat: prunedStat, idx: idx } } }); /* modifiedStats: {stat: Statistic; idx: number} */
               }}
             >
               Save Changes
@@ -131,6 +149,7 @@ export function StatEditPage() {
           </>
         )}
       </main>
+      <ErrorModal title="Error - No options on filter" errorMsg="You cannot create a filter without any options." id="errorModal" />
     </div>
   );
 }

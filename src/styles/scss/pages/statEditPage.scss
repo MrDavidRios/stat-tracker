@@ -6,7 +6,7 @@
 
     height: 94px;
 
-    grid-template-columns: 96px calc(100% - (96px * 2));
+    grid-template-columns: 96px calc(100% - (96px * 2)) 96px;
 
     align-items: center;
     text-align: center;
@@ -23,12 +23,26 @@
       }
 
       &:hover {
-        background-color: rgb(228, 228, 228);
+        background-color: rgb(228, 228, 228) !important;
       }
 
       &:active {
-        background-color: rgb(202, 202, 202);
+        background-color: rgb(202, 202, 202) !important;
         margin-top: 2px;
+      }
+    }
+
+    #deleteStatButton {
+      border: none;
+      outline: none;
+      background: none;
+
+      div {
+        padding-top: 4px;
+      }
+
+      i {
+        filter: $red-filter;
       }
     }
 
@@ -135,7 +149,7 @@
 }
 
 .filter-template-edit {
-  min-height: 80px;
+  min-height: 100px;
 
   display: grid;
   grid-template-columns: auto auto auto;
@@ -149,10 +163,16 @@
     margin-bottom: 20px;
   }
 
-  button:first-of-type {
-    height: 40px;
+  > div {
+    button:first-of-type {
+      height: 40px;
 
-    color: white !important;
+      color: white !important;
+    }
+
+    p {
+      margin-top: 5px !important;
+    }
   }
 
   .remove-filter-proto-btn,

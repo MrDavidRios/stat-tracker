@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Statistic } from './Statistic';
 
-export const StatCard = ({ stat, idx }: { stat: Statistic; idx: number }) => {
+export const StatCard = ({ stat, idx, statAmount }: { stat: Statistic; idx: number; statAmount: number }) => {
   // Make highlights here.
   // In order (highest to lowest priority):
   // - Number of entries
@@ -18,7 +18,7 @@ export const StatCard = ({ stat, idx }: { stat: Statistic; idx: number }) => {
       </button>
       <p className="stat-name">{stat.statName}</p>
       <p className="stat-highlights">{multipleEntries ? stat.entries.length + ' entries' : '1 entry'}</p>
-      <button className="edit-button" title="Edit" onClick={() => navigate('/StatEditPage', { state: { stat: stat, idx: idx } })}>
+      <button className="edit-button" title="Edit" onClick={() => navigate('/StatEditPage', { state: { stat: stat, idx: idx, statAmount: statAmount } })}>
         <i className="bi bi-pencil-fill"></i>
       </button>
     </div>

@@ -1,7 +1,7 @@
 #statEditPageWrapper header {
   display: grid;
   height: 94px;
-  grid-template-columns: 96px calc(100% - (96px * 2));
+  grid-template-columns: 96px calc(100% - (96px * 2)) 96px;
   align-items: center;
   text-align: center;
   padding: 10px; }
@@ -12,10 +12,18 @@
       filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
       font-size: 32px; }
     #statEditPageWrapper header button:hover {
-      background-color: #e4e4e4; }
+      background-color: #e4e4e4 !important; }
     #statEditPageWrapper header button:active {
-      background-color: #cacaca;
+      background-color: #cacaca !important;
       margin-top: 2px; }
+  #statEditPageWrapper header #deleteStatButton {
+    border: none;
+    outline: none;
+    background: none; }
+    #statEditPageWrapper header #deleteStatButton div {
+      padding-top: 4px; }
+    #statEditPageWrapper header #deleteStatButton i {
+      filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%); }
   #statEditPageWrapper header > div {
     width: 100%; }
     #statEditPageWrapper header > div .input-with-label-outside {
@@ -82,7 +90,7 @@
     border-top: 1px solid #fff; }
 
 .filter-template-edit {
-  min-height: 80px;
+  min-height: 100px;
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto 2px;
@@ -91,9 +99,11 @@
   column-gap: 20px; }
   .filter-template-edit .input-with-label-below {
     margin-bottom: 20px; }
-  .filter-template-edit button:first-of-type {
+  .filter-template-edit > div button:first-of-type {
     height: 40px;
     color: white !important; }
+  .filter-template-edit > div p {
+    margin-top: 5px !important; }
   .filter-template-edit .remove-filter-proto-btn,
   .filter-template-edit #optionCard button,
   .filter-template-edit #filterOptionsModal #closeButton {

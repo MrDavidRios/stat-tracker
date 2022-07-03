@@ -5,7 +5,7 @@ export const StatsList = ({ statistics }: { statistics: Statistic[] }) => {
   return (
     <div id="statsList">
       {statistics.map((statistic, idx) => (
-        <StatCard key={idx} stat={statistic} idx={idx} />
+        <StatCard key={idx} stat={statistic} idx={idx} statAmount={statistics.length} />
       ))}
     </div>
   );

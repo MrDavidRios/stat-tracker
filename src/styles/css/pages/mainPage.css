@@ -1,7 +1,7 @@
 #mainWrapper {
   background-color: #e6e6e6;
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: 120px auto;
   height: 100%;
   text-align: center; }
 

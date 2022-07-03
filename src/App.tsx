@@ -25,14 +25,19 @@ export function App(this: any) {
     if (!_.isEqual(statistics, newArr)) setStatistics(newArr);
   }
 
+  if ((location as any).state?.statToDeleteIdx !== undefined) {
+    const { statToDeleteIdx: idxToDelete, statAmount } = location.state as { statToDeleteIdx: number; statAmount: number };
+    const newArr = [...statistics].filter((_statistic, idx) => idx !== idxToDelete);
+
+    console.log(statistics.length, statAmount);
+
+    if (statistics.length === statAmount) setStatistics(newArr);
+  }
+
   function addEntry(statistic: Statistic, idx: number) {
     const newArr = [...statistics];
     newArr[idx] = statistic;
     setStatistics(newArr);
-  }
-
-  function deleteStatistic(statisticIdx: number) {
-    setStatistics(statistics.filter((_statistic, idx) => idx !== statisticIdx));
   }
 
   useEffect(() => {
