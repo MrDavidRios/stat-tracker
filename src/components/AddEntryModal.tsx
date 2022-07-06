@@ -70,7 +70,10 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
             className="btn btn-primary"
             onClick={() => {
               if (validInput) {
-                addEntryCallback(idx, entry);
+                const entryWithDate = { ...entry };
+                entryWithDate.date = new Date();
+
+                addEntryCallback(idx, entryWithDate);
                 closeModal();
               }
             }}

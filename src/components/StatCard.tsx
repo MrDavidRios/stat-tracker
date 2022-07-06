@@ -14,12 +14,15 @@ export const StatCard = ({ stat, idx, statAmount, addEntryCallback }: { stat: St
   const [displayAddEntryModal, setAddEntryModalStatus] = useState(false);
 
   return (
-    <div className="stat-card" title="View Stats">
+    <div className="stat-card">
       <button className="add-button" title="Add Entry" onClick={() => setAddEntryModalStatus(true)}>
         <i className="bi bi-plus-lg"></i>
       </button>
       <p className="stat-name">{stat.statName}</p>
       <p className="stat-highlights">{stat.entries.length === 0 ? 'No Entries' : stat.entries.length === 1 ? '1 Entry' : stat.entries.length + ' Entries'}</p>
+      <button className="data-view-button" title="View Stats" onClick={() => navigate('/VisualizationPage', { state: { stat: stat } })}>
+        <i className="bi bi-graph-up"></i>
+      </button>
       <button className="edit-button" title="Edit" onClick={() => navigate('/StatEditPage', { state: { stat: stat, idx: idx, statAmount: statAmount } })}>
         <i className="bi bi-pencil-fill"></i>
       </button>

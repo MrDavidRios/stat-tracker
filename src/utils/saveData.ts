@@ -1,4 +1,4 @@
-import { Statistic } from './Statistic';
+import { Statistic } from '../components/Statistic';
 
 function getSaveFilePath(filename: string): string {
   const globals = global.location.search;

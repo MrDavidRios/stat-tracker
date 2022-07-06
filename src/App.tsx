@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Entry, Statistic } from './components/Statistic';
 import { StartupToggle } from './components/StartupToggle';
-import { loadStats, saveStats } from './components/saveData';
-import { StatsList } from './StatsList';
+import { loadStats, saveStats } from './utils/saveData';
+import { StatsList } from './components/StatsList';
 import { AddStatButton } from './components/AddStatButton';
 import { useLocation } from 'react-router-dom';
 import _ from 'lodash';
@@ -50,6 +50,8 @@ export function App(this: any) {
 
     setStatistics(newArr);
   }
+
+  console.log(statistics);
 
   useEffect(() => {
     saveStats(statistics);

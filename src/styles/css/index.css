@@ -1961,6 +1961,18 @@ textarea.form-control-lg {
     background-color: #cacaca;
     margin-top: 2px; }
 
+#visualizationPageWrapper button {
+  cursor: pointer;
+  border-radius: 10px; }
+  #visualizationPageWrapper button i {
+    filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
+    font-size: 32px; }
+  #visualizationPageWrapper button:hover {
+    background-color: #e4e4e4 !important; }
+  #visualizationPageWrapper button:active {
+    background-color: #cacaca !important;
+    margin-top: 2px; }
+
 .action {
   height: min-content;
   display: flex;
@@ -2002,7 +2014,7 @@ textarea.form-control-lg {
   align-items: center;
   text-align: left;
   column-gap: 10px;
-  grid-template-columns: 50px auto 50px;
+  grid-template-columns: 50px auto 50px 50px;
   grid-template-rows: 50% 50%;
   padding: 0 5px 0 5px;
   border-radius: 10px; }
@@ -2012,13 +2024,13 @@ textarea.form-control-lg {
   .stat-card > button {
     grid-row: 1 / row2-end;
     border: none;
+    cursor: pointer;
     border-radius: 10px;
     width: 50px;
     height: 50px; }
   .stat-card .add-button {
     background-color: #a898d7;
-    padding-top: 3px;
-    cursor: pointer; }
+    padding-top: 3px; }
     .stat-card .add-button i {
       filter: invert(100%) sepia(4%) saturate(17%) hue-rotate(184deg) brightness(107%) contrast(104%);
       font-size: 32px;
@@ -2027,18 +2039,24 @@ textarea.form-control-lg {
       background-color: #998bc4; }
     .stat-card .add-button:active {
       margin-top: 2px; }
+  .stat-card .data-view-button,
   .stat-card .edit-button {
-    background: none;
-    grid-column: 3;
-    cursor: pointer; }
-    .stat-card .edit-button i {
-      font-size: 20px;
-      filter: invert(67%) sepia(13%) saturate(12%) hue-rotate(316deg) brightness(87%) contrast(85%); }
+    background: none; }
+    .stat-card .data-view-button:hover,
     .stat-card .edit-button:hover {
       background-color: #e4e4e4; }
+    .stat-card .data-view-button:active,
     .stat-card .edit-button:active {
       background-color: #cacaca;
       margin-top: 2px; }
+    .stat-card .data-view-button i,
+    .stat-card .edit-button i {
+      font-size: 20px;
+      filter: invert(67%) sepia(13%) saturate(12%) hue-rotate(316deg) brightness(87%) contrast(85%); }
+  .stat-card .data-view-button {
+    grid-column: 3; }
+  .stat-card .edit-button {
+    grid-column: 4; }
 
 .dropdown-menu {
   padding: 5px !important; }

@@ -1,0 +1,22 @@
+@import '../variables';
+
+#visualizationPageWrapper {
+  button {
+    cursor: pointer;
+    border-radius: 10px;
+
+    i {
+      filter: $light-grey-filter;
+      font-size: 32px;
+    }
+
+    &:hover {
+      background-color: rgb(228, 228, 228) !important;
+    }
+
+    &:active {
+      background-color: rgb(202, 202, 202) !important;
+      margin-top: 2px;
+    }
+  }
+}

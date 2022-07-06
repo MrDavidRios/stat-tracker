@@ -1,5 +1,5 @@
-import { StatCard } from './components/StatCard';
-import { Statistic } from './components/Statistic';
+import { StatCard } from './StatCard';
+import { Statistic } from './Statistic';
 
 export const StatsList = ({ statistics, addEntryCallback }: { statistics: Statistic[]; addEntryCallback: Function }) => {
   return (
