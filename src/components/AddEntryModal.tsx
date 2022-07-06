@@ -72,6 +72,7 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
               if (validInput) {
                 const entryWithDate = { ...entry };
                 entryWithDate.date = new Date();
+                entryWithDate.date.setDate(new Date().getDate() - 1000);
 
                 addEntryCallback(idx, entryWithDate);
                 closeModal();

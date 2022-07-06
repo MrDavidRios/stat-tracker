@@ -130,7 +130,7 @@ export function StatEditPage() {
           </div>
           Add Filter
         </button>
-        {_.isEqual(stat, originalStat) ? (
+        {!adding && _.isEqual(stat, originalStat) ? (
           ''
         ) : (
           <>
