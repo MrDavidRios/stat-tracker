@@ -2098,9 +2098,8 @@ textarea.form-control-lg {
     position: absolute;
     top: 24px;
     right: 24px; }
-  #addEntryModal .input-with-label-below {
-    margin: auto;
-    margin-bottom: 30px; }
+  #addEntryModal #valueInput {
+    margin: auto; }
   #addEntryModal .add-entry-filter-form {
     display: flex;
     justify-content: center;

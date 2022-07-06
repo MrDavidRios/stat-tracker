@@ -6,12 +6,14 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
   const defaultFilterVals = stat.filters.map(filterProt => new FilterValue(filterProt, 0));
 
   const [entry, updateEntry] = useState(new Entry(0, defaultFilterVals, new Date()));
+  const [validInput, updateInputValidity] = useState(false);
 
   function dropdownSelected(filterIdx: number, valueOptionIdx: number) {
     const modifiedEntry = { ...entry };
     modifiedEntry.filters[filterIdx].valueIdx = valueOptionIdx;
     updateEntry(modifiedEntry);
   }
+
   return (
     <div className="backdrop">
       <div id="addEntryModal" className="horizontally-centered-absolute">
@@ -23,25 +25,35 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
             </div>
           </button>
         </div>
-        <div className="input-with-label-below">
+        <div id="valueInput">
           <input
-            className="form-control"
-            value={entry.value}
+            className={`form-control ${validInput ? '' : 'is-invalid'}`}
+            aria-describedby="valueInputFeedback"
+            placeholder="Value"
             onChange={e => {
-              e.target.value = e.target.value
-                .replace(/[^0-9.]/g, '')
-                .replace(/(\..*?)\..*/g, '$1')
-                .replace(/^0[^.]/, '0');
-
               const modifiedEntry = { ...entry };
 
-              if (e.target.value.trim() === '') modifiedEntry.value = 0;
-              else modifiedEntry.value = parseInt(e.target.value);
+              try {
+                e.target.value = e.target.value
+                  .replace(/[^0-9.]/g, '')
+                  .replace(/(\..*?)\..*/g, '$1')
+                  .replace(/^0[^.]/, '0');
 
-              updateEntry(modifiedEntry);
+                modifiedEntry.value = parseFloat(e.target.value);
+
+                if (e.target.value === '' || e.target.value === '.') updateInputValidity(false);
+                else updateInputValidity(true);
+
+                //   if (e.target.value.trim() === '') modifiedEntry.value = 0;
+                //   else modifiedEntry.value = parseFloat(e.target.value);
+
+                updateEntry(modifiedEntry);
+              } catch {}
             }}
           ></input>
-          <p>Value</p>
+          <div id="valueInputFeedback" className="invalid-feedback">
+            Please provide a valid number.
+          </div>
         </div>
         <div id="valueOptionsWrapper">
           {stat.filters.map((_filter, _idx) => (
@@ -57,8 +69,10 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
             type="button"
             className="btn btn-primary"
             onClick={() => {
-              addEntryCallback(idx, entry);
-              closeModal();
+              if (validInput) {
+                addEntryCallback(idx, entry);
+                closeModal();
+              }
             }}
           >
             Add Entry
