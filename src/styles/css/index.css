@@ -1964,19 +1964,18 @@ textarea.form-control-lg {
 #visualizationPageWrapper {
   height: calc(100% - 100px); }
   #visualizationPageWrapper .back-arrow-btn {
-    width: 64px; }
-  #visualizationPageWrapper button {
     position: absolute;
     top: 40px;
     left: 32px;
+    width: 64px;
     cursor: pointer;
     border-radius: 10px; }
-    #visualizationPageWrapper button i {
+    #visualizationPageWrapper .back-arrow-btn i {
       filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
       font-size: 32px; }
-    #visualizationPageWrapper button:hover {
+    #visualizationPageWrapper .back-arrow-btn:hover {
       background-color: #e4e4e4 !important; }
-    #visualizationPageWrapper button:active {
+    #visualizationPageWrapper .back-arrow-btn:active {
       background-color: #cacaca !important;
       margin-top: 2px; }
   #visualizationPageWrapper header {
@@ -1988,6 +1987,15 @@ textarea.form-control-lg {
   #visualizationPageWrapper main {
     height: calc(100% - 30px);
     padding: 0 10px 30px 10px; }
+    #visualizationPageWrapper main #filterDropdownWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: min-content;
+      margin: auto;
+      padding-bottom: 20px; }
+    #visualizationPageWrapper main #chartContainer {
+      height: calc(100% - 40px); }
 
 .action {
   height: min-content;

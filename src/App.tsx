@@ -9,12 +9,13 @@ import _ from 'lodash';
 
 export function App(this: any) {
   const loadedStats = loadStats();
-
   const location = useLocation();
 
   const [statistics, setStatistics] = useState(loadedStats);
 
   const [autoStartup, setAutoStartup] = useState(window.Main.autoStartupStatus());
+
+  console.log(statistics);
 
   if ((location as any).state?.modifiedStat !== undefined) {
     const modifiedStat = (location.state as { modifiedStat: { stat: Statistic; idx: number } }).modifiedStat;
@@ -50,8 +51,6 @@ export function App(this: any) {
 
     setStatistics(newArr);
   }
-
-  console.log(statistics);
 
   useEffect(() => {
     saveStats(statistics);

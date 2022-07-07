@@ -4,8 +4,6 @@ import { Statistic } from './Statistic';
 export const AddStatButton = ({ statistics }: { statistics: Statistic[] }) => {
   const navigate = useNavigate();
 
-  console.log(statistics.length);
-
   return (
     <button
       id="addStatButton"

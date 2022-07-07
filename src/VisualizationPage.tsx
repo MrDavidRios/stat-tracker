@@ -6,6 +6,7 @@ import { Chart, registerables } from 'chart.js';
 import _ from 'lodash';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import Dropdown from './components/Dropdown';
 Chart.register(...registerables);
 
 export function VisualizationPage() {
@@ -31,7 +32,7 @@ export function VisualizationPage() {
   if (allEntriesInSameDay) timeUnit = 'hour';
   if (allEntriesInSameMinute) timeUnit = 'second';
 
-  const [filterIdx, updateFilterIdx] = useState(0); // TODO: Add filter choice functionality
+  const [filterIdx, updateFilterIdx] = useState(0);
 
   const data = {
     datasets:
@@ -40,7 +41,7 @@ export function VisualizationPage() {
             id: valueOptionIdx,
             label: valueOption,
             data: stat.entries
-              .filter(entry => entry.filters[filterIdx].valueIdx === valueOptionIdx)
+              .filter(entry => entry.filters[filterIdx]?.valueIdx === valueOptionIdx)
               .map((entry, idx, entries) => ({ x: getDatePercentage(new Date(entry.date), entries), y: entry.value })),
             fill: true,
             borderColor: presetFilterColors[valueOptionIdx % presetFilterColors.length].primary,
@@ -92,7 +93,17 @@ export function VisualizationPage() {
         <h2>{stat.statName}</h2>
       </header>
       <main>
-        <Line data={data as any} options={options as any} />
+        {stat.filters.length > 1 ? (
+          <div id="filterDropdownWrapper">
+            <p>Filter: </p>
+            <Dropdown options={stat.filters.map(e => e.name)} callback={(idx: number) => updateFilterIdx(idx)} />
+          </div>
+        ) : (
+          ''
+        )}
+        <div id="chartContainer">
+          <Line data={data as any} options={options as any} />
+        </div>
       </main>
     </div>
   );

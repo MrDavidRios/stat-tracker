@@ -4,13 +4,11 @@
   height: calc(100% - 100px);
 
   .back-arrow-btn {
-    width: 64px;
-  }
-
-  button {
     position: absolute;
     top: 40px;
     left: 32px;
+
+    width: 64px;
 
     cursor: pointer;
     border-radius: 10px;
@@ -44,5 +42,21 @@
     height: calc(100% - 30px);
 
     padding: 0 10px 30px 10px;
+
+    #filterDropdownWrapper {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      width: min-content;
+      margin: auto;
+
+      padding-bottom: 20px;
+    }
+
+    #chartContainer {
+      height: calc(100% - 40px);
+    }
   }
 }

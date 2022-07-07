@@ -16,7 +16,16 @@ const Dropdown = ({ options, callback, selectedValueIdx = 0 }: { options: string
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         {options.map((option, idx) => (
           <li key={idx}>
-            <a onClick={() => updateSelectedOption(idx)} className="dropdown-item" draggable="false" href="#">
+            <a
+              onClick={e => {
+                e.preventDefault();
+
+                updateSelectedOption(idx);
+              }}
+              className="dropdown-item"
+              draggable="false"
+              href="#"
+            >
               {option}
             </a>
           </li>

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ErrorModal } from './components/ErrorModal';
-import { FilterOptionsModal } from './components/FilterOptionsModal';
+import { StatFiltersForm } from './components/StatFiltersForm';
 import { FilterPrototype, Statistic } from './components/Statistic';
 
 export function StatEditPage() {
@@ -13,14 +13,6 @@ export function StatEditPage() {
   const { stat: originalStat, idx, statAmount, adding = false } = location.state as { stat: Statistic; idx: number; statAmount: number; adding?: boolean };
 
   const [stat, updateStat] = useState(originalStat);
-
-  const [filterModalOpenIdx, setFilterModalStatus] = useState(-1);
-
-  function updateFilter(filter: FilterPrototype, idx: number) {
-    const newStat = structuredClone(stat);
-    newStat.filters[idx] = filter;
-    updateStat(newStat);
-  }
 
   // On change, use original callback
   // Having replace = true makes it so that state doesn't carry to main page.
@@ -64,57 +56,7 @@ export function StatEditPage() {
       <main>
         <hr />
         <h2>Filters</h2>
-        <div id="statFilterForm">
-          {stat.filters.map((filter, idx) => (
-            <div className="filter-template-edit" key={idx}>
-              <div className="input-with-label-below">
-                <input
-                  className="form-control"
-                  value={filter.name}
-                  onChange={e => {
-                    const updatedFilters = [...stat.filters];
-                    updatedFilters[idx] = { ...updatedFilters[idx], name: e.target.value };
-
-                    const modifiedStat: Statistic = { ...stat, filters: updatedFilters };
-
-                    updateStat(modifiedStat);
-                  }}
-                ></input>
-                <p>Filter Name</p>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setFilterModalStatus(idx);
-                  }}
-                >
-                  Edit Filter Options
-                </button>
-                <p style={{ color: filter.valueOptions.length === 0 ? 'red' : '' }}>
-                  {filter.valueOptions.length === 0 ? 'No options' : filter.valueOptions.length > 1 ? filter.valueOptions.length + ' options' : '1 option'}
-                </p>
-              </div>
-              {filterModalOpenIdx === idx ? <FilterOptionsModal filter={filter} idx={idx} updateFilterCallback={updateFilter} closeModalCallback={() => setFilterModalStatus(-1)} /> : ''}
-              <button
-                className="remove-filter-proto-btn"
-                title="Remove Filter"
-                onClick={() => {
-                  const updatedFilters = stat.filters.filter((_stat, _idx) => _idx !== idx);
-                  const modifiedStat: Statistic = { ...stat, filters: updatedFilters };
-
-                  updateStat(modifiedStat);
-                }}
-              >
-                <div>
-                  <i className="bi bi-x-lg"></i>
-                </div>
-              </button>
-              <hr />
-            </div>
-          ))}
-        </div>
+        <StatFiltersForm stat={stat} updateStat={updateStat} />
         <button
           id="addFilterButton"
           className="big-btn"
