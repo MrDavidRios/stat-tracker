@@ -7,6 +7,7 @@ import _ from 'lodash';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Dropdown from './components/Dropdown';
+import format from 'date-fns/format';
 Chart.register(...registerables);
 
 export function VisualizationPage() {
@@ -64,6 +65,7 @@ export function VisualizationPage() {
     scales: {
       x: {
         type: 'linear',
+        display: false,
 
         ticks: {
           maxTicksLimit: 15,
@@ -80,6 +82,17 @@ export function VisualizationPage() {
         beginAtZero: true,
         min: 0, // minimum value
         max: _.maxBy(stat.entries, e => e.value)!.value + 2, // maximum value
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          title: (context: any) => {
+            const idx = context[0].dataIndex;
+            console.log(stat.entries[idx].date);
+            return format(new Date(stat.entries[idx].date), 'MMMM dd yyyy, h:mm a');
+          },
+        },
       },
     },
   };
