@@ -52,6 +52,11 @@ export const FilterOptionsModal = ({
                   placeholder="Option"
                   aria-describedby="optionInputFeedback"
                   onChange={e => {
+                    if (invalidInputIndices.some(e => e.includes(idx))) {
+                      const modifiedInvalidInputIndices = invalidInputIndices.filter(e => !e.includes(idx));
+                      setInvalidInputIndices(modifiedInvalidInputIndices);
+                    }
+
                     const modifiedFilter = { ...filter };
                     modifiedFilter.valueOptions[idx] = e.target.value;
                     updateFilter(modifiedFilter);
