@@ -1,8 +1,18 @@
+export class ValueOption {
+  name: string;
+  color: string;
+
+  constructor(name: string, color: string) {
+    this.name = name;
+    this.color = color;
+  }
+}
+
 export class FilterPrototype {
   name: string;
-  valueOptions: string[];
+  valueOptions: ValueOption[];
 
-  constructor(name: string, valueOptions: string[]) {
+  constructor(name: string, valueOptions: ValueOption[]) {
     this.name = name;
     this.valueOptions = valueOptions;
   }

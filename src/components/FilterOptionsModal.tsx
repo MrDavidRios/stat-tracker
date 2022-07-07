@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getDuplicates } from '../utils/arrayOps';
-import { FilterPrototype } from './Statistic';
+import { presetFilterColors } from '../utils/themeColors';
+import { FilterPrototype, ValueOption } from './Statistic';
 
 export const FilterOptionsModal = ({
   filter: originalFilter,
@@ -15,9 +16,9 @@ export const FilterOptionsModal = ({
 }) => {
   function closeModal() {
     // Remove empty options
-    const prunedFilter = { ...filter, valueOptions: filter.valueOptions.filter(_option => _option !== '') };
+    const prunedFilter = { ...filter, valueOptions: filter.valueOptions.filter(_option => _option.name !== '') };
 
-    const valueOptionNames = filter.valueOptions.map(_valueOption => _valueOption.toLowerCase());
+    const valueOptionNames = filter.valueOptions.map(_valueOption => _valueOption.name.toLowerCase());
 
     if (valueOptionNames.length !== new Set(valueOptionNames).size) {
       const duplicateFilterNameIndices: number[][] = Array.from(getDuplicates(valueOptionNames).values());
@@ -45,10 +46,23 @@ export const FilterOptionsModal = ({
         <div id="optionsWrapper">
           {filter.valueOptions.map((option, idx) => (
             <div id="optionCard" key={idx}>
+              <div className="color-picker-container">
+                <input
+                  className="color-picker"
+                  type="color"
+                  value={option.color}
+                  onChange={e => {
+                    const modifiedFilter = { ...filter };
+                    modifiedFilter.valueOptions[idx].color = e.target.value;
+                    updateFilter(modifiedFilter);
+                  }}
+                ></input>
+              </div>
+
               <div className="input-with-label-below">
                 <input
                   className={`form-control ${invalidInputIndices.some(e => e.includes(idx)) ? 'is-invalid' : ''}`}
-                  value={option}
+                  value={option.name}
                   placeholder="Option"
                   aria-describedby="optionInputFeedback"
                   onChange={e => {
@@ -58,7 +72,7 @@ export const FilterOptionsModal = ({
                     }
 
                     const modifiedFilter = { ...filter };
-                    modifiedFilter.valueOptions[idx] = e.target.value;
+                    modifiedFilter.valueOptions[idx].name = e.target.value;
                     updateFilter(modifiedFilter);
                   }}
                 ></input>
@@ -84,8 +98,10 @@ export const FilterOptionsModal = ({
             type="button"
             className="btn btn-primary"
             onClick={() => {
-              if (!filter.valueOptions.includes('')) {
-                const modifiedFilter = { ...filter, valueOptions: [...filter.valueOptions, ''] };
+              if (!filter.valueOptions.map(e => e.name).includes('')) {
+                const newFilterIdx = filter.valueOptions.length;
+
+                const modifiedFilter = { ...filter, valueOptions: [...filter.valueOptions, new ValueOption('', presetFilterColors[newFilterIdx % presetFilterColors.length].primary)] };
                 updateFilter(modifiedFilter);
               }
             }}

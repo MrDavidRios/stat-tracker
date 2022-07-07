@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import Dropdown from './components/Dropdown';
 import format from 'date-fns/format';
+import { presetFilterColors } from './utils/themeColors';
+import { LightenDarkenColor } from './utils/colorOps';
 Chart.register(...registerables);
 
 export function VisualizationPage() {
@@ -19,40 +21,26 @@ export function VisualizationPage() {
   const sortedEntries = _.orderBy(stat.entries, ['date'], ['asc']);
   stat.entries = sortedEntries;
 
-  const allEntriesInSameMonth = stat.entries.every(e => dayjs(stat.entries[0].date).isSame(e.date, 'month'));
-  const allEntriesInSameWeek = stat.entries.every(e => dayjs(stat.entries[0].date).isSame(e.date, 'week'));
-  const allEntriesInSameDay = stat.entries.every(e => dayjs(stat.entries[0].date).isSame(e.date, 'day'));
-  const allEntriesInSameMinute = stat.entries.every(e => dayjs(stat.entries[0].date).isSame(e.date, 'minute'));
-
-  let timeUnit: string;
-
-  timeUnit = 'month';
-
-  if (allEntriesInSameMonth) timeUnit = 'week';
-  if (allEntriesInSameWeek) timeUnit = 'day';
-  if (allEntriesInSameDay) timeUnit = 'hour';
-  if (allEntriesInSameMinute) timeUnit = 'second';
-
   const [filterIdx, updateFilterIdx] = useState(0);
 
   const data = {
     datasets:
-      stat.filters[filterIdx].valueOptions.length > 0
+      stat.filters[filterIdx]?.valueOptions.length > 0
         ? stat.filters[filterIdx].valueOptions.map((valueOption, valueOptionIdx) => ({
             id: valueOptionIdx,
-            label: valueOption,
+            label: valueOption.name,
             data: stat.entries
               .filter(entry => entry.filters[filterIdx]?.valueIdx === valueOptionIdx)
               .map((entry, idx, entries) => ({ x: getDatePercentage(new Date(entry.date), entries), y: entry.value })),
             fill: true,
-            borderColor: presetFilterColors[valueOptionIdx % presetFilterColors.length].primary,
-            backgroundColor: presetFilterColors[valueOptionIdx % presetFilterColors.length].background,
+            borderColor: valueOption.color,
+            backgroundColor: LightenDarkenColor(valueOption.color, 20, 0.5),
           }))
         : [
             {
               id: 1,
               label: stat.statName,
-              data: stat.entries.map(entry => ({ x: entry.date, y: entry.value })),
+              data: stat.entries.map(entry => ({ x: getDatePercentage(new Date(entry.date), stat.entries), y: entry.value })),
               fill: true,
               borderColor: presetFilterColors[0].primary,
               backgroundColor: presetFilterColors[0].background,
@@ -66,15 +54,6 @@ export function VisualizationPage() {
       x: {
         type: 'linear',
         display: false,
-
-        ticks: {
-          maxTicksLimit: 15,
-        },
-
-        time: {
-          unit: timeUnit,
-          stepSize: timeUnit === 'minute' ? 5 : 1,
-        },
       },
       y: {
         type: 'linear',
@@ -89,7 +68,6 @@ export function VisualizationPage() {
         callbacks: {
           title: (context: any) => {
             const idx = context[0].dataIndex;
-            console.log(stat.entries[idx].date);
             return format(new Date(stat.entries[idx].date), 'MMMM dd yyyy, h:mm a');
           },
         },
@@ -128,11 +106,3 @@ function getDatePercentage(date: Date, entries: Entry[]): number {
 
   return (date.getTime() - minDate.getTime()) / (maxDate.getTime() - minDate.getTime());
 }
-
-const presetFilterColors = [
-  { primary: '#00ff88', background: 'rgba(89, 255, 178, 0.5)' },
-  { primary: '#3e62bd', background: 'rgba(62, 98, 189, 0.5)' },
-  { primary: '#ffd814', background: 'rgba(255, 230, 105, 0.5)' },
-  { primary: '#c300ff', background: 'rgba(225, 128, 255, 0.5)' },
-  { primary: '#ff6a00', background: 'rgba(255, 106, 0, 0.5)' },
-];

@@ -2117,10 +2117,25 @@ textarea.form-control-lg {
     margin-bottom: 30px; }
   #filterOptionsModal #optionCard {
     display: grid;
-    grid-template-columns: auto 60px;
+    grid-template-columns: 40px auto 60px;
     justify-content: center;
     column-gap: 20px;
     padding-left: 40px; }
+    #filterOptionsModal #optionCard .color-picker-container {
+      width: 100%;
+      margin-top: 3px;
+      display: flex;
+      justify-content: flex-end; }
+      #filterOptionsModal #optionCard .color-picker-container .color-picker {
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        width: 30px;
+        height: 32px;
+        cursor: pointer; }
+        #filterOptionsModal #optionCard .color-picker-container .color-picker::-webkit-color-swatch {
+          border-radius: 50%;
+          border: 2px solid #9c9c9c; }
   #filterOptionsModal #optionsWrapper {
     max-height: calc(90vh - 165px);
     overflow-y: auto;

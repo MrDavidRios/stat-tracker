@@ -42,13 +42,39 @@
 
   #optionCard {
     display: grid;
-    grid-template-columns: auto 60px;
+    grid-template-columns: 40px auto 60px;
 
     justify-content: center;
 
     column-gap: 20px;
 
     padding-left: 40px;
+
+    .color-picker-container {
+      width: 100%;
+
+      margin-top: 3px;
+
+      display: flex;
+      justify-content: flex-end;
+
+      .color-picker {
+        appearance: none;
+        border: none;
+
+        background-color: transparent;
+
+        width: 30px;
+        height: 32px;
+
+        cursor: pointer;
+
+        &::-webkit-color-swatch {
+          border-radius: 50%;
+          border: 2px solid rgb(156, 156, 156);
+        }
+      }
+    }
   }
 
   #optionsWrapper {

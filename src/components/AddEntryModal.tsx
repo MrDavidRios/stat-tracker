@@ -58,7 +58,7 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
           {stat.filters.map((_filter, _idx) => (
             <div className="add-entry-filter-form" key={_idx}>
               <p>{_filter.name + ':'}</p>
-              <Dropdown options={_filter.valueOptions} callback={(idx: number) => dropdownSelected(_idx, idx)} />
+              <Dropdown options={_filter.valueOptions.map(e => e.name)} callback={(idx: number) => dropdownSelected(_idx, idx)} />
             </div>
           ))}
         </div>
