@@ -2,8 +2,19 @@ import { useState } from 'react';
 import { FilterPrototype, Statistic } from './Statistic';
 import { FilterOptionsModal } from './FilterOptionsModal';
 
-export const StatFiltersForm = ({ stat, updateStat }: { stat: Statistic; updateStat: Function }) => {
+export const StatFiltersForm = ({
+  stat,
+  updateStat,
+  invalidInputIndices,
+  updateInvalidInputIndices,
+}: {
+  stat: Statistic;
+  updateStat: Function;
+  invalidInputIndices: string;
+  updateInvalidInputIndices: Function;
+}) => {
   const [filterModalOpenIdx, setFilterModalStatus] = useState(-1);
+  const parsedInvalidInputIndices: number[][] = JSON.parse(invalidInputIndices);
 
   function updateFilter(filter: FilterPrototype, idx: number) {
     const newStat = structuredClone(stat);
@@ -17,13 +28,18 @@ export const StatFiltersForm = ({ stat, updateStat }: { stat: Statistic; updateS
         <div className="filter-template-edit" key={idx}>
           <div className="input-with-label-below">
             <input
-              className="form-control"
+              className={`form-control ${parsedInvalidInputIndices.some(e => e.includes(idx)) ? 'is-invalid' : ''}`}
               value={filter.name}
               onChange={e => {
                 const updatedFilters = [...stat.filters];
                 updatedFilters[idx] = { ...updatedFilters[idx], name: e.target.value };
 
                 const modifiedStat: Statistic = { ...stat, filters: updatedFilters };
+
+                if (parsedInvalidInputIndices.some(e => e.includes(idx))) {
+                  const modifiedInvalidInputIndices = parsedInvalidInputIndices.filter(e => !e.includes(idx));
+                  updateInvalidInputIndices(JSON.stringify(modifiedInvalidInputIndices));
+                }
 
                 updateStat(modifiedStat);
               }}

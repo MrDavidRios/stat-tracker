@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getDuplicates } from '../utils/arrayOps';
 import { FilterPrototype } from './Statistic';
 
 export const FilterOptionsModal = ({
@@ -16,11 +17,19 @@ export const FilterOptionsModal = ({
     // Remove empty options
     const prunedFilter = { ...filter, valueOptions: filter.valueOptions.filter(_option => _option !== '') };
 
-    updateFilterCallback(prunedFilter, idx);
-    closeModalCallback();
+    const valueOptionNames = filter.valueOptions.map(_valueOption => _valueOption.toLowerCase());
+
+    if (valueOptionNames.length !== new Set(valueOptionNames).size) {
+      const duplicateFilterNameIndices: number[][] = Array.from(getDuplicates(valueOptionNames).values());
+      setInvalidInputIndices(duplicateFilterNameIndices);
+    } else {
+      updateFilterCallback(prunedFilter, idx);
+      closeModalCallback();
+    }
   }
 
   const [filter, updateFilter] = useState(originalFilter);
+  const [invalidInputIndices, setInvalidInputIndices] = useState([] as number[][]);
 
   return (
     <div className="backdrop">
@@ -38,15 +47,19 @@ export const FilterOptionsModal = ({
             <div id="optionCard" key={idx}>
               <div className="input-with-label-below">
                 <input
-                  className="form-control"
+                  className={`form-control ${invalidInputIndices.some(e => e.includes(idx)) ? 'is-invalid' : ''}`}
                   value={option}
+                  placeholder="Option"
+                  aria-describedby="optionInputFeedback"
                   onChange={e => {
                     const modifiedFilter = { ...filter };
                     modifiedFilter.valueOptions[idx] = e.target.value;
                     updateFilter(modifiedFilter);
                   }}
                 ></input>
-                <p>Option</p>
+                <div id="optionInputFeedback" className="invalid-feedback">
+                  Duplicate Value
+                </div>
               </div>
               <button
                 onClick={() => {

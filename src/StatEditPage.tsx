@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ErrorModal } from './components/ErrorModal';
 import { StatFiltersForm } from './components/StatFiltersForm';
 import { FilterPrototype, Statistic } from './components/Statistic';
+import { getDuplicates } from './utils/arrayOps';
 
 export function StatEditPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export function StatEditPage() {
   const { stat: originalStat, idx, statAmount, adding = false } = location.state as { stat: Statistic; idx: number; statAmount: number; adding?: boolean };
 
   const [stat, updateStat] = useState(originalStat);
+  const [invalidInputIndices, setInvalidInputIndices] = useState([] as number[][]);
 
   // On change, use original callback
   // Having replace = true makes it so that state doesn't carry to main page.
@@ -56,7 +58,12 @@ export function StatEditPage() {
       <main>
         <hr />
         <h2>Filters</h2>
-        <StatFiltersForm stat={stat} updateStat={updateStat} />
+        <StatFiltersForm
+          stat={stat}
+          updateStat={updateStat}
+          invalidInputIndices={JSON.stringify(invalidInputIndices)}
+          updateInvalidInputIndices={(indices: string) => setInvalidInputIndices(JSON.parse(indices))}
+        />
         <button
           id="addFilterButton"
           className="big-btn"
@@ -83,15 +90,24 @@ export function StatEditPage() {
               onClick={() => {
                 const prunedStat = { ...stat, filters: stat.filters.filter(_filter => _filter.name.trim() !== '') };
 
-                // Check if there are any errors with input. If so, bring up modal window
-                if (_.some(prunedStat.filters, _filter => _filter.valueOptions.length === 0)) {
-                  const errorModal = Modal.getOrCreateInstance(document.getElementById('errorModal') as Element);
-                  errorModal.toggle();
+                const filterNames = stat.filters.map(_filter => _filter.name.toLowerCase());
+
+                if (filterNames.length !== new Set(filterNames).size) {
+                  const duplicateNameErrorModal = Modal.getOrCreateInstance(document.getElementById('duplicateNameErrorModal') as Element);
+                  duplicateNameErrorModal.toggle();
+
+                  const duplicateFilterNameIndices: number[][] = Array.from(getDuplicates(filterNames).values());
+                  setInvalidInputIndices(duplicateFilterNameIndices);
                 } else {
-                  console.log(statAmount);
-                  if (adding) navigate('/', { state: { statToAdd: prunedStat, statAmount: statAmount } });
-                  else navigate('/', { state: { modifiedStat: { stat: prunedStat, idx: idx } } });
-                } /* modifiedStats: {stat: Statistic; idx: number} */
+                  // Check if there are any errors with input. If so, bring up modal window
+                  if (_.some(prunedStat.filters, _filter => _filter.valueOptions.length === 0)) {
+                    const errorModal = Modal.getOrCreateInstance(document.getElementById('errorModal') as Element);
+                    errorModal.toggle();
+                  } else {
+                    if (adding) navigate('/', { state: { statToAdd: prunedStat, statAmount: statAmount } });
+                    else navigate('/', { state: { modifiedStat: { stat: prunedStat, idx: idx } } });
+                  } /* modifiedStats: {stat: Statistic; idx: number} */
+                }
               }}
             >
               {adding ? 'Add Stat' : 'Save Changes'}
@@ -100,6 +116,7 @@ export function StatEditPage() {
         )}
       </main>
       <ErrorModal title="Error - No options on filter" errorMsg="You cannot create a filter without any options." id="errorModal" />
+      <ErrorModal title="Error - Duplicate filter names" errorMsg="You cannot have multiple filters with the same name." id="duplicateNameErrorModal" />
     </div>
   );
 }

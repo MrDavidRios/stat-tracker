@@ -28,6 +28,7 @@ export const ErrorModal = ({ title, errorMsg, id }: { title: string; errorMsg: s
               className="btn btn-secondary"
               onClick={() => {
                 const modalInstance = Modal.getInstance(document.getElementById(id) as Element)!;
+                console.log(document.getElementById(id));
                 modalInstance.hide();
               }}
             >
