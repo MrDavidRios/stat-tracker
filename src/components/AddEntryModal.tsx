@@ -7,6 +7,7 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
 
   const [entry, updateEntry] = useState(new Entry(0, defaultFilterVals, new Date()));
   const [validInput, updateInputValidity] = useState(false);
+  const [triedToSubmit, updateTriedToSubmit] = useState(false);
 
   function dropdownSelected(filterIdx: number, valueOptionIdx: number) {
     const modifiedEntry = { ...entry };
@@ -27,7 +28,7 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
         </div>
         <div id="valueInput">
           <input
-            className={`form-control ${validInput ? '' : 'is-invalid'}`}
+            className={`form-control ${!validInput && triedToSubmit ? 'is-invalid' : ''}`}
             aria-describedby="valueInputFeedback"
             placeholder="Value"
             onChange={e => {
@@ -44,9 +45,7 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
                 if (e.target.value === '' || e.target.value === '.') updateInputValidity(false);
                 else updateInputValidity(true);
 
-                //   if (e.target.value.trim() === '') modifiedEntry.value = 0;
-                //   else modifiedEntry.value = parseFloat(e.target.value);
-
+                updateTriedToSubmit(false);
                 updateEntry(modifiedEntry);
               } catch {}
             }}
@@ -72,11 +71,10 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
               if (validInput) {
                 const entryWithDate = { ...entry };
                 entryWithDate.date = new Date();
-                entryWithDate.date.setDate(new Date().getDate() - 1000);
 
                 addEntryCallback(idx, entryWithDate);
                 closeModal();
-              }
+              } else updateTriedToSubmit(true);
             }}
           >
             Add Entry
