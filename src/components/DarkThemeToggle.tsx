@@ -6,13 +6,13 @@ export const DarkThemeToggle = ({ enabled, callback }: { enabled: boolean; callb
         type="checkbox"
         checked={enabled}
         id="flexSwitchCheckDefault"
-        title={enabled ? 'Disable Dark Theme' : 'Enable Dark Theme'}
+        title={enabled ? 'Disable Dark Mode' : 'Enable Dark Mode'}
         onChange={e => {
           callback(e.target.checked);
         }}
       />
       <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-        Dark Theme
+        Dark Mode
       </label>
     </div>
   );

@@ -51,7 +51,7 @@ export function StatEditPage() {
             }}
           >
             <div>
-              <i className="bi bi-trash"></i>
+              <i className="bi bi-trash3"></i>
             </div>
           </button>
         )}
