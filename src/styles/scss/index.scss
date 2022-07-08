@@ -31,11 +31,13 @@ $primary: $accent-color-purple;
 @import 'pages/visualizationPage.scss';
 
 // Components
-@import 'components/actionComponent';
 @import 'components/statCard';
 @import 'components/dropdown';
 @import 'components/filterOptionsModal';
 @import 'components/addEntryModal';
+
+// Theme
+@import 'theme';
 
 * {
   font-family: 'Heebo', sans-serif;

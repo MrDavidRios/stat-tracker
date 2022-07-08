@@ -1,8 +1,4 @@
-@import '../variables';
-
 #mainWrapper {
-  background-color: $foreground-color;
-
   display: grid;
   grid-template-rows: 120px auto;
 
@@ -31,8 +27,6 @@
 }
 
 #statsList {
-  background-color: $foreground-color;
-
   padding: 0 30px 20px 30px;
 
   display: flex;
@@ -61,4 +55,9 @@
       font-size: 24px;
     }
   }
+}
+
+#toggleWrapper {
+  display: flex;
+  flex-direction: column;
 }

@@ -18,5 +18,7 @@ export function LightenDarkenColor(col: string, amt: number, alpha = 1.0) {
   if (g > 255) g = 255;
   else if (g < 0) g = 0;
 
+  console.log(r, g, b);
+
   return `rgba(${r}, ${g}, ${b}, ${alpha}`;
 }

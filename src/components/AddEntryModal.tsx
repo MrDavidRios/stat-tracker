@@ -17,10 +17,10 @@ export const AddEntryModal = ({ stat, idx, addEntryCallback, closeModal }: { sta
 
   return (
     <div className="backdrop">
-      <div id="addEntryModal" className="horizontally-centered-absolute">
+      <div id="addEntryModal" className="horizontally-centered-absolute modal-element">
         <div>
           <h2>Add Entry</h2>
-          <button id="closeButton" onClick={() => closeModal()} title="Close and Save Changes">
+          <button id="closeButton" className="hover-background" onClick={() => closeModal()} title="Close and Save Changes">
             <div>
               <i className="bi bi-x-lg"></i>
             </div>

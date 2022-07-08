@@ -1,64 +1,58 @@
-#statEditPageWrapper header {
-  display: grid;
-  height: 94px;
-  grid-template-columns: 96px calc(100% - (96px * 2)) 96px;
-  align-items: center;
-  text-align: center;
-  padding: 10px; }
-  #statEditPageWrapper header button {
-    cursor: pointer;
-    border-radius: 10px; }
-    #statEditPageWrapper header button i {
-      filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
-      font-size: 32px; }
-    #statEditPageWrapper header button:hover {
-      background-color: #e4e4e4 !important; }
-    #statEditPageWrapper header button:active {
-      background-color: #cacaca !important;
-      margin-top: 2px; }
-  #statEditPageWrapper header #deleteStatButton {
-    border: none;
-    outline: none;
-    background: none; }
-    #statEditPageWrapper header #deleteStatButton div {
-      padding-top: 4px; }
-    #statEditPageWrapper header #deleteStatButton i {
-      filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%); }
-  #statEditPageWrapper header > div {
-    width: 100%; }
-    #statEditPageWrapper header > div .input-with-label-outside {
-      width: min-content;
-      margin: auto;
-      position: relative; }
-      #statEditPageWrapper header > div .input-with-label-outside input {
-        height: 40px;
-        width: min-content !important;
-        text-align: center;
-        font-size: 24px;
-        border-radius: 10px; }
-        #statEditPageWrapper header > div .input-with-label-outside input:focus + p {
-          top: -26px; }
-      #statEditPageWrapper header > div .input-with-label-outside p {
-        position: absolute;
-        left: 0;
-        top: -22px;
-        color: #777777;
-        transition: 0.15s ease; }
-
-#statEditPageWrapper main {
-  text-align: center;
-  padding: 0 40px 0 40px; }
-  #statEditPageWrapper main hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0; }
-
-#statNameInput {
-  background-color: #e6e6e6;
-  border: none; }
+#statEditPageWrapper {
+  height: 100%; }
+  #statEditPageWrapper header {
+    display: grid;
+    height: 94px;
+    grid-template-columns: 96px calc(100% - (96px * 2)) 96px;
+    align-items: center;
+    text-align: center;
+    padding: 10px; }
+    #statEditPageWrapper header button {
+      cursor: pointer;
+      border-radius: 10px; }
+      #statEditPageWrapper header button i {
+        filter: invert(64%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(89%) contrast(90%);
+        font-size: 32px; }
+      #statEditPageWrapper header button:active {
+        margin-top: 2px; }
+    #statEditPageWrapper header #deleteStatButton {
+      border: none;
+      outline: none;
+      background: none; }
+      #statEditPageWrapper header #deleteStatButton div {
+        padding-top: 4px; }
+      #statEditPageWrapper header #deleteStatButton i {
+        filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%); }
+    #statEditPageWrapper header > div {
+      width: 100%; }
+      #statEditPageWrapper header > div .input-with-label-outside {
+        width: min-content;
+        margin: auto;
+        position: relative; }
+        #statEditPageWrapper header > div .input-with-label-outside input {
+          height: 40px;
+          width: min-content !important;
+          text-align: center;
+          font-size: 24px;
+          border-radius: 10px; }
+          #statEditPageWrapper header > div .input-with-label-outside input:focus + p {
+            top: -26px; }
+        #statEditPageWrapper header > div .input-with-label-outside p {
+          position: absolute;
+          left: 0;
+          top: -22px;
+          color: #777777;
+          transition: 0.15s ease; }
+  #statEditPageWrapper main {
+    text-align: center;
+    padding: 0 40px 0 40px; }
+    #statEditPageWrapper main hr {
+      display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 1em 0;
+      padding: 0; }
 
 #addFilterButton {
   width: 175px;
@@ -127,12 +121,7 @@
     filter: invert(10%) sepia(94%) saturate(4958%) hue-rotate(357deg) brightness(90%) contrast(91%);
     font-size: 24px;
     padding-top: 2px; }
-  .remove-filter-proto-btn:hover,
-  #optionCard button:hover,
-  #closeButton:hover {
-    background-color: #e4e4e4; }
   .remove-filter-proto-btn:active,
   #optionCard button:active,
   #closeButton:active {
-    background-color: #cacaca;
     margin-top: 2px; }

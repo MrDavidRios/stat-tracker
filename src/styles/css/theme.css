@@ -1,0 +1,65 @@
+.light #mainWrapper {
+  background-color: #e6e6e6; }
+  .light #mainWrapper .stat-card {
+    background-color: #fff; }
+
+.light .background,
+.light .modal-element {
+  background-color: #fff; }
+
+.light .foreground {
+  background-color: #e6e6e6; }
+
+.light button.hover-background:hover {
+  background-color: #e4e4e4 !important; }
+
+.dark .background {
+  background-color: #121212; }
+
+.dark .form-control {
+  background-color: transparent;
+  border-color: #b5b5b5; }
+
+.dark .foreground,
+.dark .modal-element,
+.dark .stat-card {
+  background-color: #222222; }
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark .high-emphasis {
+  color: white;
+  opacity: 0.87; }
+
+.dark p,
+.dark label,
+.dark .form-control {
+  color: white;
+  opacity: 0.6; }
+
+.dark ul.dropdown-menu {
+  background-color: #333333; }
+  .dark ul.dropdown-menu a.dropdown-item {
+    color: white;
+    opacity: 0.6; }
+    .dark ul.dropdown-menu a.dropdown-item:hover {
+      background-color: #545454; }
+
+.dark .modal-header .btn-close {
+  filter: invert(100%) sepia(4%) saturate(17%) hue-rotate(184deg) brightness(107%) contrast(104%); }
+
+.dark .modal-content {
+  background-color: #222222; }
+  .dark .modal-content .modal-body {
+    color: white;
+    opacity: 0.6; }
+
+.dark #statEditPageWrapper header > div .input-with-label-outside p {
+  color: white !important; }
+
+.dark hr {
+  border-top: 1px solid #333333 !important; }
+
+.dark button.hover-background:hover {
+  background-color: #2c2c2c !important; }

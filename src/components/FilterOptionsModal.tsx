@@ -34,10 +34,10 @@ export const FilterOptionsModal = ({
 
   return (
     <div className="backdrop">
-      <div id="filterOptionsModal" className="horizontally-centered-absolute">
+      <div id="filterOptionsModal" className="horizontally-centered-absolute modal-element">
         <div>
           <h2>Filter Options</h2>
-          <button id="closeButton" onClick={() => closeModal()} title="Close and Save Changes">
+          <button id="closeButton" className="hover-background" onClick={() => closeModal()} title="Close and Save Changes">
             <div>
               <i className="bi bi-x-lg"></i>
             </div>
@@ -81,6 +81,7 @@ export const FilterOptionsModal = ({
                 </div>
               </div>
               <button
+                className="hover-background"
                 onClick={() => {
                   updateFilter({ ...filter, valueOptions: filter.valueOptions.filter((_option, _idx) => _idx !== idx) });
                 }}
@@ -101,7 +102,7 @@ export const FilterOptionsModal = ({
               if (!filter.valueOptions.map(e => e.name).includes('')) {
                 const newFilterIdx = filter.valueOptions.length;
 
-                const modifiedFilter = { ...filter, valueOptions: [...filter.valueOptions, new ValueOption('', presetFilterColors[newFilterIdx % presetFilterColors.length].primary)] };
+                const modifiedFilter = { ...filter, valueOptions: [...filter.valueOptions, new ValueOption('', presetFilterColors[newFilterIdx % presetFilterColors.length])] };
                 updateFilter(modifiedFilter);
               }
             }}

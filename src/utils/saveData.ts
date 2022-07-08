@@ -1,3 +1,4 @@
+import { Settings } from '../components/Settings';
 import { Statistic } from '../components/Statistic';
 
 function getSaveFilePath(filename: string): string {
@@ -24,5 +25,27 @@ export function loadStats(): Statistic[] {
     return JSON.parse(JSON.parse(output));
   } catch (err) {
     return [];
+  }
+}
+
+export function saveSettings(settings: Settings) {
+  const path = getSaveFilePath('settings.json');
+
+  try {
+    window.Main.writeFile(path, JSON.stringify(settings));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function loadSettings(): Settings {
+  const path = getSaveFilePath('settings.json');
+
+  try {
+    const output = window.Main.readFile(path);
+
+    return JSON.parse(JSON.parse(output));
+  } catch (err) {
+    return new Settings(false);
   }
 }

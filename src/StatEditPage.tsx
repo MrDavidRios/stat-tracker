@@ -13,15 +13,15 @@ export function StatEditPage() {
 
   const { stat: originalStat, idx, statAmount, adding = false } = location.state as { stat: Statistic; idx: number; statAmount: number; adding?: boolean };
 
-  const [stat, updateStat] = useState(originalStat);
+  const [stat, updateStat] = useState(structuredClone(originalStat) as Statistic);
   const [invalidInputIndices, setInvalidInputIndices] = useState([] as number[][]);
 
   // On change, use original callback
   // Having replace = true makes it so that state doesn't carry to main page.
   return (
-    <div id="statEditPageWrapper">
+    <div id="statEditPageWrapper" className="background">
       <header>
-        <button className="back-arrow-btn" onClick={() => navigate('/', { replace: true })} title="Back">
+        <button className="back-arrow-btn hover-background" onClick={() => navigate('/', { replace: true })} title="Back">
           <i className="bi bi-arrow-left"></i>
         </button>
         <div>
@@ -44,6 +44,7 @@ export function StatEditPage() {
         ) : (
           <button
             id="deleteStatButton"
+            className="hover-background"
             title="Delete Stat"
             onClick={() => {
               navigate('/', { state: { statToDeleteIdx: idx, statAmount: statAmount } });

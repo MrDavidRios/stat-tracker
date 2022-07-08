@@ -28,7 +28,7 @@ export const StatFiltersForm = ({
         <div className="filter-template-edit" key={idx}>
           <div className="input-with-label-below">
             <input
-              className={`form-control ${parsedInvalidInputIndices.some(e => e.includes(idx)) ? 'is-invalid' : ''}`}
+              className={`form-control form-white ${parsedInvalidInputIndices.some(e => e.includes(idx)) ? 'is-invalid' : ''}`}
               value={filter.name}
               onChange={e => {
                 const updatedFilters = [...stat.filters];
@@ -56,13 +56,13 @@ export const StatFiltersForm = ({
             >
               Edit Filter Options
             </button>
-            <p style={{ color: filter.valueOptions.length === 0 ? 'red' : '' }}>
+            <p className="high-emphasis" style={{ color: filter.valueOptions.length === 0 ? 'red' : '' }}>
               {filter.valueOptions.length === 0 ? 'No options' : filter.valueOptions.length > 1 ? filter.valueOptions.length + ' options' : '1 option'}
             </p>
           </div>
           {filterModalOpenIdx === idx ? <FilterOptionsModal filter={filter} idx={idx} updateFilterCallback={updateFilter} closeModalCallback={() => setFilterModalStatus(-1)} /> : ''}
           <button
-            className="remove-filter-proto-btn"
+            className="remove-filter-proto-btn hover-background"
             title="Remove Filter"
             onClick={() => {
               // Remove selected filter

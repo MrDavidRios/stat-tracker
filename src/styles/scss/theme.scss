@@ -1,0 +1,94 @@
+@import 'variables';
+
+.light {
+  #mainWrapper {
+    background-color: $foreground-color-light;
+
+    .stat-card {
+      background-color: $background-color-light;
+    }
+  }
+
+  .background,
+  .modal-element {
+    background-color: $background-color-light;
+  }
+
+  .foreground {
+    background-color: $foreground-color-light;
+  }
+
+  button.hover-background:hover {
+    background-color: $foreground-highlight-color-light !important;
+  }
+}
+
+.dark {
+  .background {
+    background-color: $background-color-dark;
+  }
+
+  .form-control {
+    background-color: transparent;
+    border-color: #b5b5b5;
+  }
+
+  .foreground,
+  .modal-element,
+  .stat-card {
+    background-color: $foreground-color-dark;
+  }
+
+  h1,
+  h2,
+  h3,
+  .high-emphasis {
+    color: white;
+    opacity: 0.87;
+  }
+
+  p,
+  label,
+  .form-control {
+    color: white;
+    opacity: 0.6;
+  }
+
+  ul.dropdown-menu {
+    background-color: #333333;
+
+    a.dropdown-item {
+      color: white;
+      opacity: 0.6;
+
+      &:hover {
+        background-color: #545454;
+      }
+    }
+  }
+
+  .modal-header .btn-close {
+    filter: $white-filter;
+  }
+
+  .modal-content {
+    background-color: $foreground-color-dark;
+
+    .modal-body {
+      color: white;
+      opacity: 0.6;
+    }
+  }
+
+  #statEditPageWrapper header > div .input-with-label-outside p {
+    color: white !important;
+  }
+
+  hr {
+    border-top: 1px solid #333333 !important;
+  }
+
+  button.hover-background:hover {
+    background-color: $foreground-highlight-color-dark !important;
+  }
+}

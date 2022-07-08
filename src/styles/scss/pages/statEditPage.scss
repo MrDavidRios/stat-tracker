@@ -1,6 +1,8 @@
 @import '../variables';
 
 #statEditPageWrapper {
+  height: 100%;
+
   header {
     display: grid;
 
@@ -22,12 +24,7 @@
         font-size: 32px;
       }
 
-      &:hover {
-        background-color: rgb(228, 228, 228) !important;
-      }
-
       &:active {
-        background-color: rgb(202, 202, 202) !important;
         margin-top: 2px;
       }
     }
@@ -98,11 +95,6 @@
       padding: 0;
     }
   }
-}
-
-#statNameInput {
-  background-color: $foreground-color;
-  border: none;
 }
 
 #addFilterButton {
@@ -205,12 +197,7 @@
     padding-top: 2px;
   }
 
-  &:hover {
-    background-color: rgb(228, 228, 228);
-  }
-
   &:active {
-    background-color: rgb(202, 202, 202);
     margin-top: 2px;
   }
 }

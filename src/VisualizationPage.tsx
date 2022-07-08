@@ -4,12 +4,11 @@ import { Entry, Statistic } from './components/Statistic';
 import 'chartjs-adapter-date-fns';
 import { Chart, registerables } from 'chart.js';
 import _ from 'lodash';
-import dayjs from 'dayjs';
 import { useState } from 'react';
 import Dropdown from './components/Dropdown';
 import format from 'date-fns/format';
 import { presetFilterColors } from './utils/themeColors';
-import { LightenDarkenColor } from './utils/colorOps';
+import tinycolor from 'tinycolor2';
 Chart.register(...registerables);
 
 export function VisualizationPage() {
@@ -34,7 +33,7 @@ export function VisualizationPage() {
               .map((entry, idx, entries) => ({ x: getDatePercentage(new Date(entry.date), entries), y: entry.value })),
             fill: true,
             borderColor: valueOption.color,
-            backgroundColor: LightenDarkenColor(valueOption.color, 20, 0.5),
+            backgroundColor: tinycolor(valueOption.color).lighten(20).setAlpha(0.7).toString(),
           }))
         : [
             {
@@ -42,8 +41,8 @@ export function VisualizationPage() {
               label: stat.statName,
               data: stat.entries.map(entry => ({ x: getDatePercentage(new Date(entry.date), stat.entries), y: entry.value })),
               fill: true,
-              borderColor: presetFilterColors[0].primary,
-              backgroundColor: presetFilterColors[0].background,
+              borderColor: presetFilterColors[0],
+              backgroundColor: tinycolor(presetFilterColors[0]).lighten(20).setAlpha(0.7).toString(),
             },
           ],
   };
@@ -76,9 +75,9 @@ export function VisualizationPage() {
   };
 
   return (
-    <div id="visualizationPageWrapper">
+    <div id="visualizationPageWrapper" className="background">
       <header>
-        <button className="back-arrow-btn" onClick={() => navigate('/', { replace: true })} title="Back">
+        <button className="back-arrow-btn hover-background" onClick={() => navigate('/', { replace: true })} title="Back">
           <i className="bi bi-arrow-left"></i>
         </button>
         <h2>{stat.statName}</h2>
