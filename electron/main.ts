@@ -18,7 +18,7 @@ if (fs.existsSync(SETTINGS_PATH)) {
 }
 
 const autoLaunch = new AutoLaunch({
-  name: 'automator',
+  name: 'stat-tracker',
   path: app.getPath('exe'),
   isHidden: true,
 });
@@ -113,7 +113,7 @@ function createTray() {
     },
   ]);
 
-  tray.setToolTip('Automator');
+  tray.setToolTip('Stat Tracker');
   tray.setContextMenu(contextMenu);
   tray.setIgnoreDoubleClickEvents(true);
 
