@@ -1,13 +1,14 @@
-## Stat Tracker
+# Stat Tracker
 
 * Developed to get a better handle on React.js + Electron.
+* Chart.js is used for graphing, and React Router is used for navigation.
 
-Graph any measurable statistic over time
+Keep track of any measurable statistic over time!
 
-Features
+## Features
 * Add filters to your data for more precise classification
-* Dark mode!
-* Custom graph/filter colors!
+* Dark mode
+* Custom graph/filter colors
 
 ### Landing Page
 ![Main Screen](https://user-images.githubusercontent.com/52746497/188503893-39a599c5-956d-41fa-a597-032ecfe2e81f.png)
